@@ -1,4 +1,15 @@
+//specifies type for each property
+export type Question = {
+    category: string;
+    correct_answer: string;
+    difficulty: string;
+    incorrect_answer: string[];
+    question: string;
+    type: string
+}
 
+// combining correct and incorrect answers together => it uses the type Question and adds a property called "answers"
+export type QuestionState = Question & {answers: string[]};
 
 export enum Difficulty {
     EASY = "easy",
