@@ -1,3 +1,6 @@
+import QuestionCard from "./components/QuestionCard";
+import {shuffleArray} from "./utils";
+
 //specifies type for each property
 export type Question = {
     category: string;
@@ -21,5 +24,11 @@ export const fetchQuizQuestions = async (amount: number, difficulty: Difficulty 
     const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
     // awaits the fetch itself and then when we convert it to json
     const data = await (await fetch(endpoint)).json();
-    console.log(data);
+    return data.results.map((question: Question) => (
+        {  
+            //using the spread operator to use all the property in question 
+            ...question, 
+            answer: shuffleArray([...question.incorrect_answer, question.correct_answer])
+        }
+    ))
 }
