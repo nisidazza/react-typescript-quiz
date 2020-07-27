@@ -1,4 +1,4 @@
-import QuestionCard from "./components/QuestionCard";
+
 import { shuffleArray } from "./utils";
 
 //specifies type for each property
