@@ -46,7 +46,12 @@ const App = () => {
   };
 
   //sent in by props to the QuestionCard component
-  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(!gameOver) {
+      //user's answer
+      const answer = e.currentTarget.value;
+    }
+  };
 
   const nextQuestion = () => {};
 
