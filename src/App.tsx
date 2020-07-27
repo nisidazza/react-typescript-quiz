@@ -26,9 +26,20 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY));
+  const startTrivia = async () => {
+    //when the start button is clicked, it's going to trigger the API fetch
+    setLoading(true);
+    setGameOver(false);
 
-  const startTrivia = async () => {};
+    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY);
+
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+
+    setLoading(false)
+  };
 
   //sent in by props to the QuestionCard component
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
