@@ -47,9 +47,21 @@ const App = () => {
 
   //sent in by props to the QuestionCard component
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if(!gameOver) {
+    if (!gameOver) {
       //user's answer
       const answer = e.currentTarget.value;
+      //check answer against the correct answer
+      const correct = questions[number].correct_answer === answer;
+      //add score if answer is correct
+      if (correct) setScore((prev) => prev + 1);
+      //save answer in the array for user's answers
+      const answerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correct_answer,
+      };
+      setUserAnswers((prev) => [...prev, answerObject]);
     }
   };
 
