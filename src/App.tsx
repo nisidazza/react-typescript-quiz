@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import {fetchQuizQuestions} from "./API";
+import { fetchQuizQuestions } from "./API";
 
 //Components
 import QuestionCard from "./components/QuestionCard";
 
 //Types
-import {QuestionState, Difficulty} from "./API";
+import { QuestionState, Difficulty } from "./API";
 
 //user's answer
 type AnswerObject = {
@@ -13,12 +13,13 @@ type AnswerObject = {
   answer: string;
   correct: boolean;
   correctAnswer: string;
-}
+};
 
 const TOTAL_QUESTIONS = 10;
 
 const App = () => {
-  /*using React Hooks to add some states*/ 
+  /*using React Hooks to add some states*/
+
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
@@ -31,14 +32,17 @@ const App = () => {
     setLoading(true);
     setGameOver(false);
 
-    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY);
+    const newQuestions = await fetchQuizQuestions(
+      TOTAL_QUESTIONS,
+      Difficulty.EASY
+    );
 
     setQuestions(newQuestions);
     setScore(0);
     setUserAnswers([]);
     setNumber(0);
 
-    setLoading(false)
+    setLoading(false);
   };
 
   //sent in by props to the QuestionCard component
@@ -49,9 +53,12 @@ const App = () => {
   return (
     <div className="App">
       <h1>Trivia Quiz</h1>
-      <button className="start" onClick={startTrivia}>
-        Start
-      </button>
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <button className="start" onClick={startTrivia}>
+          Start
+        </button>
+      ) : null}
+
       <p className="score">Score:</p>
       <p>Loading Questions...</p>
       {/* <QuestionCard 
